@@ -22,6 +22,34 @@ def create_example_file(input_file):
     else:
         print(f"Файл {input_file} вже існує.")
 
+def filter_lines_with_pandas(input_file, keyword, output_file="filtered.txt"):
+    """
+    Метод, що буде фільтрувати текст вхідного файлу за допомогою pandas.
+    Результати записуються у filtered.txt, якщо рядок містить ключове слово.
+    """
+    try:
+        # Створюємо файл example.txt, якщо він не існує
+        create_example_file(input_file)
+
+        # Читання вхідного файлу як простого тексту за допомогою pandas
+        df = pd.read_csv(input_file, header=None, names=["Line"], encoding="utf-8")
+
+        # Фільтруємо рядки, що містять ключове слово
+        filtered_df = df[df['Line'].str.contains(keyword, na=False)]
+
+        # Запис результатів у вихідний файл
+        filtered_df.to_csv(output_file, index=False, header=False, encoding="utf-8")
+
+        print(f"Фільтрація завершена. Результати записані у {output_file}")
+    except FileNotFoundError:
+        print("Помилка: Файл не знайдено.")
+    except Exception as e:
+        print(f"Сталася помилка: {e}")
+
+# Запуск скрипта
+input_filename = "example.txt"
+keyword_to_search = "Python"
+filter_lines_with_pandas(input_filename, keyword_to_search)
 
 
 
