@@ -33,11 +33,11 @@ jobs:
     - name: Lint with flake8
       run: |
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        flake8 . --count --exit-zero --ignore=E231,E302,W191,W291 --max-complexity=20 --max-line-length=127 --format=html --htmldir=reports/flake8-reports
+        flake8 . --count --exit-zero --ignore=E231,E302,W191,W291 --max-complexity=20 --max-line-length=127 --format=html --htmldir=reports/flake8-report
 
     - name: Test with pytest
       run: |
-        pytest --html=reports/pytest-reports/pytest.html --self-contained-html -v
+        pytest --html=reports/pytest-report/pytest.html --self-contained-html -v
 
     - name: Upload Flake8 report
       uses: actions/upload-artifact@v4
