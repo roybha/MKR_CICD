@@ -37,6 +37,7 @@ def filtered_file():
 # Тест для create_example_file
 def test_create_example_file(example_file):
     """Тестуємо створення файлу example.txt."""
+    create_example_file(example_file)
     assert os.path.exists(example_file), f"{example_file} не існує після виклику create_example_file()"
 
 
